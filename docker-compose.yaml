@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  rpcserver:
+    container_name: rpcserver
+    build: ../
+    image: sd
+    volumes:
+     - ./server.py:/app/server.py
+     - ./constRPYC.py:/app/constRPYC.py
+    networks:
+      - rpcnet
+    tty: true
+  
+  rpcclient:
+    container_name: rpcclient
+    build: ../
+    image: sd
+    volumes:
+     - ./client.py:/app/client.py
+     - ./constRPYC.py:/app/constRPYC.py
+    networks:
+      - rpcnet
+    tty: true
+
+networks:
+  rpcnet:
+    driver: bridge
